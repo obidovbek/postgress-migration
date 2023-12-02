@@ -2,7 +2,7 @@ import { QueryInterface } from "sequelize";
 import { DataTypes } from "sequelize";
 
 export = {
-    up: async (queryInterface:QueryInterface) => {
+    up: async ({context:queryInterface}:any) => {
       await queryInterface.createTable('users', {
         id: {
             type: DataTypes.INTEGER,
@@ -22,9 +22,18 @@ export = {
           allowNull: false,
         },
       });
+      queryInterface.bulkInsert('users', 
+      [ 
+        {
+          balance:10000,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }
+      ], 
+      {})
     },
   
-    down: async (queryInterface:QueryInterface) => {
-      await queryInterface.dropTable('users1s');
+    down: async ({context:queryInterface}:any) => {
+      await queryInterface.dropTable('users');
     },
 };

@@ -9,11 +9,10 @@ export class UmzugMigration{
     umzug;
     constructor(@inject(TYPES.PostgresService) private postgresService:PostgresService){
         this.umzug =new Umzug({
-            migrations: { glob: './src/users/user.migration.ts' },
+            migrations: { glob: './src/migrations/*.ts' },
             context: this.postgresService.sequelize.getQueryInterface(),
             storage: new SequelizeStorage({ 
                 sequelize:this.postgresService.sequelize,
-                modelName: 'users'
             }),
             logger: console,
         });

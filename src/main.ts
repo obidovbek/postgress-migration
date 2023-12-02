@@ -20,7 +20,8 @@ const appBindings = new ContainerModule((bind: interfaces.Bind)=>{
     bind<UserController>(TYPES.UserController).to(UserController),
     bind<UserRepository>(TYPES.UserRepository).to(UserRepository),
     bind<UmzugMigration>(TYPES.UmzugMigration).to(UmzugMigration)
-})
+});
+
 async function bootstrap():Promise<IBootstrapReturn>{
     const appContainer = new Container();
     appContainer.load(appBindings);

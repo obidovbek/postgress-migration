@@ -8,7 +8,7 @@ import { ExeptionFilter } from './errors/exeption.filter';
 import { PostgresService } from './database/postgres.service';
 import { UserController } from './users/users.controller';
 import { UmzugMigration } from './migrations';
-
+import { User } from './users/user.model';
 @injectable()
 export class App{
     app: Express;
@@ -34,7 +34,7 @@ export class App{
         this.app.use(express.json());
         this.useRoutes();
         await this.postgresService.connect();
-        this.umzugMigration.up();
+        await this.umzugMigration.up();
         this.useExeptionFilters();
         this.app.listen(this.port, ()=>console.log(`Server runs at port ${this.port}`))
     }
